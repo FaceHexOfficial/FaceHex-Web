@@ -2,8 +2,8 @@ import {
   FaInstagram,
   FaFacebook,
   FaYoutube,
-  FaXTwitter
-} from "react-icons/fa6";
+  FaTwitter
+} from "react-icons/fa";
 
 export default function Socials() {
   return (
@@ -24,7 +24,7 @@ export default function Socials() {
           target="_blank"
           rel="noreferrer"
         >
-          <FaXTwitter />
+          <FaTwitter />
         </a>
 
         <a
