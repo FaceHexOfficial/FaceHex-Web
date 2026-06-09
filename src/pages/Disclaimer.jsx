@@ -1,0 +1,370 @@
+import React, { useEffect } from 'react';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+const Disclaimer = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false, 
+      easing: 'ease-out-cubic',
+      offset: 50,
+    });
+    
+    setTimeout(() => {
+      AOS.refresh();
+    }, 100);
+
+    window.scrollTo(0, 0);
+  }, []);
+
+  const EmailLink = ({ email }) => (
+    <a href={`mailto:${email}`} className="text-white font-semibold hover:text-gray-300 underline underline-offset-4 transition-colors">
+      {email}
+    </a>
+  );
+
+  return (
+    <>
+      <Navbar />
+      <div className="pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
+        <div data-aos="fade-up">
+          <h1 className="text-5xl md:text-7xl font-display font-bold text-white mb-6 tracking-tight uppercase">FaceHex Legal Disclaimer, Copyright Policy, IP Policy, and Acceptable Use Policy</h1>
+          <div className="h-1 w-24 bg-white/20 mb-8 rounded-full"></div>
+          <p className="text-gray-400 text-lg mb-20 uppercase tracking-widest font-semibold">
+            Effective Date: <span className="text-white">June 06, 2026</span><br/>
+            Last Updated: <span className="text-white">June 06, 2026</span>
+          </p>
+        </div>
+        
+        <div className="text-gray-400 font-sans text-lg leading-relaxed space-y-24">
+          
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">1. EDUCATIONAL, CREATIVE, AND ENTERTAINMENT PURPOSES</h2>
+            <div className="space-y-4">
+              <p>FaceHex is provided for educational, creative, artistic, entertainment, research, experimentation, and personal-use purposes only.</p>
+              <p>FaceHex is not intended to facilitate unlawful, fraudulent, deceptive, harmful, malicious, defamatory, abusive, unethical, or criminal activity.</p>
+              <p className="font-semibold text-white">Users are solely responsible for how they use FaceHex and any content created through the application.</p>
+            </div>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">2. AI GENERATED CONTENT DISCLAIMER</h2>
+            <p className="mb-6">FaceHex utilizes artificial intelligence, machine learning, facial analysis, image processing, and face-swapping technologies.</p>
+            <p className="mb-4">AI-generated outputs may contain:</p>
+            <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
+              <li>Errors</li>
+              <li>Inaccuracies</li>
+              <li>Distortions</li>
+              <li>Artifacts</li>
+              <li>Misalignment</li>
+              <li>Unexpected Results</li>
+              <li>Unrealistic Appearances</li>
+            </ul>
+            <p className="mb-4">FaceHex does not guarantee:</p>
+            <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-6">
+              <li>Accuracy</li>
+              <li>Authenticity</li>
+              <li>Legality</li>
+              <li>Reliability</li>
+              <li>Suitability</li>
+              <li>Completeness</li>
+            </ul>
+            <p className="p-4 bg-white/5 rounded-xl border border-white/10 text-white italic">All generated content must be independently reviewed by users before publication or distribution.</p>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">3. USER RESPONSIBILITY</h2>
+            <p className="mb-6">Users assume full responsibility for:</p>
+            <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
+              <li>Uploaded Images</li>
+              <li>Selected Photographs</li>
+              <li>Camera Content</li>
+              <li>Generated Content</li>
+              <li>Shared Content</li>
+              <li>Published Content</li>
+              <li>Saved Content</li>
+            </ul>
+            <p className="font-semibold text-white">Users are solely responsible for ensuring that their actions comply with applicable laws and regulations.</p>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">4. DEEPFAKE AND IMPERSONATION POLICY</h2>
+            <p className="mb-6">Users shall not use FaceHex to:</p>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
+              <li>Impersonate Individuals</li>
+              <li>Commit Identity Theft</li>
+              <li>Conduct Scams</li>
+              <li>Commit Fraud</li>
+              <li>Spread Misinformation</li>
+              <li>Mislead The Public</li>
+              <li>Falsely Represent Another Person</li>
+              <li>Create Deceptive Political Content</li>
+              <li>Create Harmful Deepfakes</li>
+              <li>Violate Privacy Rights</li>
+              <li>Violate Publicity Rights</li>
+            </ul>
+            <p className="font-semibold text-white">FaceHex does not endorse or authorize deceptive media.</p>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">5. CRIMINAL ACTIVITY PROHIBITION</h2>
+            <p className="mb-6">FaceHex may not be used to facilitate:</p>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
+              <li>Criminal Conduct</li>
+              <li>Cybercrime</li>
+              <li>Harassment</li>
+              <li>Blackmail</li>
+              <li>Extortion</li>
+              <li>Fraud</li>
+              <li>Identity Theft</li>
+              <li>Stalking</li>
+              <li>Defamation</li>
+              <li>Threats</li>
+              <li>Terrorism</li>
+              <li>Human Exploitation</li>
+              <li>Child Exploitation</li>
+              <li>Financial Crimes</li>
+              <li>Privacy Violations</li>
+            </ul>
+            <p className="font-semibold text-white">Users are solely responsible for their conduct.</p>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">6. PLATFORM NEUTRALITY</h2>
+            <p className="mb-6">FaceHex functions solely as a software platform.</p>
+            <p className="mb-4">FaceHex:</p>
+            <ul className="space-y-4 text-gray-300 mb-8">
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Does Not Create User Content</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Does Not Direct User Actions</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Does Not Supervise User Conduct</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Does Not Approve User Generated Content</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Does Not Participate In User Misuse</li>
+            </ul>
+            <p className="font-semibold text-white">Users independently determine how they use the application.</p>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">7. NO LIABILITY FOR USER CONDUCT</h2>
+            <p className="mb-6 italic text-gray-400">To the fullest extent permitted by law:</p>
+            <p className="mb-6">FaceHex, affiliates, licensors, contractors, developers, suppliers, and service providers shall not be liable for:</p>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
+              <li>User Conduct</li>
+              <li>User Generated Content</li>
+              <li>Misuse Of The Application</li>
+              <li>Copyright Infringement By Users</li>
+              <li>Privacy Violations By Users</li>
+              <li>Criminal Activity By Users</li>
+              <li>Defamation By Users</li>
+              <li>Fraud By Users</li>
+              <li>Identity Theft By Users</li>
+              <li>Damages Caused By User Actions</li>
+            </ul>
+            <p className="font-semibold text-white">Users bear sole responsibility for their actions.</p>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">8. COPYRIGHT POLICY</h2>
+            <p className="mb-6">All FaceHex software, code, application designs, graphics, logos, branding, interfaces, text, documentation, software architecture, AI systems, trademarks, and intellectual property are protected under applicable copyright, trademark, and intellectual property laws.</p>
+            <p className="mb-6 font-semibold text-white">All rights are reserved.</p>
+            <p>No part of FaceHex may be copied, reproduced, modified, distributed, sold, licensed, reverse engineered, decompiled, or exploited without prior written authorization.</p>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">9. COPYRIGHT OWNERSHIP OF GENERATED CONTENT</h2>
+            <p className="mb-6 italic text-gray-400">Subject to applicable law:</p>
+            <div className="space-y-4">
+              <p>Users retain responsibility for content they upload.</p>
+              <p>FaceHex does not claim ownership of user-uploaded photographs.</p>
+              <p className="font-semibold text-white">Users are responsible for ensuring they possess all necessary rights, permissions, and authorizations for any content they upload, modify, generate, publish, or distribute.</p>
+            </div>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">10. TEXT, IMAGE, VIDEO, AND CONTENT RIGHTS</h2>
+            <p className="mb-6">Users are solely responsible for ensuring they possess legal rights to:</p>
+            <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-6">
+              <li>Images</li>
+              <li>Photographs</li>
+              <li>Faces</li>
+              <li>Videos</li>
+              <li>Artwork</li>
+              <li>Logos</li>
+              <li>Trademarks</li>
+              <li>Names</li>
+              <li>Text</li>
+              <li>Documents</li>
+              <li>Brands</li>
+              <li>Likenesses</li>
+            </ul>
+            <p className="mb-4">used with FaceHex.</p>
+            <p className="font-semibold text-white">Uploading content does not transfer ownership to FaceHex.</p>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">11. INTELLECTUAL PROPERTY INFRINGEMENT POLICY</h2>
+            <p className="mb-6 font-semibold text-white">FaceHex respects intellectual property rights.</p>
+            <p className="mb-4">Users may not upload, generate, distribute, or publish content that infringes:</p>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-6">
+              <li>Copyrights</li>
+              <li>Trademarks</li>
+              <li>Patents</li>
+              <li>Trade Secrets</li>
+              <li>Publicity Rights</li>
+              <li>Privacy Rights</li>
+            </ul>
+            <p>of any person or organization.</p>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">12. COPYRIGHT TAKEDOWN PROCEDURE</h2>
+            <p className="mb-6">If you believe content associated with FaceHex infringes your intellectual property rights, send a written notice to:</p>
+            <p className="mb-8"><EmailLink email="support@facehex.qzz.io" /></p>
+            <p className="mb-4">The notice should include:</p>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
+              <li>Your Full Name</li>
+              <li>Contact Information</li>
+              <li>Description Of Copyrighted Work</li>
+              <li>Description Of Alleged Infringement</li>
+              <li>Evidence Of Ownership</li>
+              <li>Statement Made In Good Faith</li>
+              <li>Statement Under Penalty Of Perjury</li>
+            </ul>
+            <p className="font-semibold text-white">FaceHex may remove content, restrict accounts, or take other appropriate action.</p>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">13. ABUSE REPORTING</h2>
+            <p className="mb-6">Reports involving:</p>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
+              <li>Copyright Infringement</li>
+              <li>Trademark Infringement</li>
+              <li>Harassment</li>
+              <li>Impersonation</li>
+              <li>Fraud</li>
+              <li>Illegal Activity</li>
+              <li>Privacy Violations</li>
+              <li>Identity Theft</li>
+              <li>Misuse Of FaceHex</li>
+            </ul>
+            <p className="mb-4">may be submitted to:</p>
+            <p><EmailLink email="support@facehex.qzz.io" /></p>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">14. SECURITY AND ANTI-TAMPERING</h2>
+            <p className="mb-6">Users shall not:</p>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
+              <li>Reverse Engineer FaceHex</li>
+              <li>Decompile FaceHex</li>
+              <li>Modify FaceHex</li>
+              <li>Bypass Security Systems</li>
+              <li>Tamper With Application Protections</li>
+              <li>Circumvent Integrity Checks</li>
+              <li>Extract Source Code</li>
+              <li>Extract AI Models</li>
+              <li>Extract Proprietary Algorithms</li>
+            </ul>
+            <div className="p-6 bg-white/5 border border-white/10 rounded-2xl">
+              <p className="mb-4 font-semibold text-white">Unauthorized attempts may result in:</p>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 list-disc pl-6 marker:text-white/30 text-gray-300">
+                <li>Immediate Account Termination</li>
+                <li>Permanent Access Restrictions</li>
+                <li>Legal Enforcement</li>
+                <li>Civil Liability</li>
+                <li>Criminal Referral Where Applicable</li>
+              </ul>
+            </div>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">15. USE AT YOUR OWN RISK</h2>
+            <div className="flex flex-col md:flex-row items-center gap-6 mb-8 text-center md:text-left">
+              <p>FaceHex is provided on an</p>
+              <div className="flex gap-4">
+                <span className="px-6 py-3 bg-white text-black font-display font-bold uppercase tracking-widest rounded-lg">"AS IS"</span>
+                <span className="flex items-center text-gray-500 italic">and</span>
+                <span className="px-6 py-3 bg-white text-black font-display font-bold uppercase tracking-widest rounded-lg">"AS AVAILABLE"</span>
+              </div>
+              <p>basis.</p>
+            </div>
+            <p className="mb-6">Users acknowledge that:</p>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
+              <li>AI Systems Are Imperfect</li>
+              <li>Generated Outputs May Be Inaccurate</li>
+              <li>Service Interruptions May Occur</li>
+              <li>Bugs May Exist</li>
+              <li>Security Incidents May Occur</li>
+              <li>Unexpected Results May Be Produced</li>
+            </ul>
+            <p className="font-semibold text-white">Use of FaceHex is entirely at the user's own risk.</p>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">16. INDEMNIFICATION</h2>
+            <p className="mb-6">Users agree to defend, indemnify, and hold harmless:</p>
+            <ul className="flex flex-wrap gap-4 mb-8">
+              <li className="px-4 py-2 bg-white/10 rounded-full text-white text-sm font-semibold">FaceHex</li>
+              <li className="px-4 py-2 bg-white/10 rounded-full text-white text-sm font-semibold">Developers</li>
+              <li className="px-4 py-2 bg-white/10 rounded-full text-white text-sm font-semibold">Contractors</li>
+              <li className="px-4 py-2 bg-white/10 rounded-full text-white text-sm font-semibold">Employees</li>
+              <li className="px-4 py-2 bg-white/10 rounded-full text-white text-sm font-semibold">Affiliates</li>
+              <li className="px-4 py-2 bg-white/10 rounded-full text-white text-sm font-semibold">Successors</li>
+              <li className="px-4 py-2 bg-white/10 rounded-full text-white text-sm font-semibold">Assigns</li>
+            </ul>
+            <p className="mb-6">from all claims, damages, liabilities, penalties, fines, settlements, costs, judgments, and legal expenses arising from:</p>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300">
+              <li>User Conduct</li>
+              <li>User Content</li>
+              <li>Copyright Infringement</li>
+              <li>Privacy Violations</li>
+              <li>Criminal Activity</li>
+              <li>Fraud</li>
+              <li>Defamation</li>
+              <li>Intellectual Property Disputes</li>
+              <li>Misuse Of FaceHex</li>
+            </ul>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">17. ACKNOWLEDGMENT</h2>
+            <p className="mb-6">By creating an account, signing in, accessing, installing, or using FaceHex, users acknowledge that they have:</p>
+            <ul className="space-y-4 text-gray-300">
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Read The Privacy Policy</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Read The Terms Of Service</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Read This Disclaimer</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Understood Their Responsibilities</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Accepted All Legal Obligations</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Agreed To Comply With Applicable Laws</li>
+              <li className="flex items-start gap-3"><div className="w-2 h-2 bg-white rounded-full mt-2"></div> Assumed Responsibility For All Content And Activity Associated With Their Use Of FaceHex</li>
+            </ul>
+          </section>
+
+          <section data-aos="fade-up" className="bg-gradient-to-br from-white/10 to-transparent border border-white/20 rounded-3xl p-8 md:p-12 mt-20 shadow-2xl">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-8">18. CONTACT INFORMATION</h2>
+            <div className="space-y-4 text-lg">
+              <p><strong className="text-white w-32 inline-block">Business:</strong> FaceHex</p>
+              <p><strong className="text-white w-32 inline-block">Country:</strong> India</p>
+              <p className="flex flex-col md:flex-row md:items-center gap-2 mt-4 pt-4 border-t border-white/10">
+                <strong className="text-white w-32">Support:</strong> 
+                <EmailLink email="support@facehex.qzz.io" />
+              </p>
+            </div>
+            <div className="mt-8 pt-8 border-t border-white/10">
+              <p className="text-gray-400">
+                For copyright complaints, abuse reports, legal notices, trademark concerns, privacy concerns, or platform misuse reports, please contact:<br/>
+                <span className="mt-2 inline-block"><EmailLink email="support@facehex.qzz.io" /></span>
+              </p>
+            </div>
+          </section>
+
+        </div>
+      </div>
+      <Footer />
+    </>
+  );
+};
+
+export default Disclaimer;
