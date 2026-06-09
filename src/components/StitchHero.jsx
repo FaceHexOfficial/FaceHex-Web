@@ -79,7 +79,7 @@ const StitchHero = () => {
 
 // Text animation removed as text was moved
   return (
-    <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-background">
+    <section ref={containerRef} className="relative w-full h-[100dvh] md:h-screen overflow-hidden bg-background">
       {/* Zero-Lag Image Sequence Canvas */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none mix-blend-lighten">
         <canvas ref={canvasRef} className="w-full h-full object-cover pointer-events-none opacity-60"></canvas>

@@ -240,7 +240,7 @@ const RevealHero = () => {
   return (
     <section 
       id="webgl-hero-container" 
-      className="relative z-20 w-full h-screen overflow-hidden bg-black flex items-center justify-center cursor-default"
+      className="relative z-20 w-full h-[100dvh] md:h-screen overflow-hidden bg-black flex items-center justify-center cursor-default"
       onPointerMove={() => { if (!hasInteracted) setHasInteracted(true); }}
       onTouchMove={() => { if (!hasInteracted) setHasInteracted(true); }}
     >
