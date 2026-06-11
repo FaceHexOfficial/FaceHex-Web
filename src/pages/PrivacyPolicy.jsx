@@ -118,12 +118,17 @@ const PrivacyPolicy = () => {
                 <li>Technical Diagnostics</li>
               </ul>
             </div>
+
+            <div data-aos="fade-up" className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-colors duration-500 mt-12">
+              <h3 className="text-xl font-bold text-white mb-4">3.4 Data Storage</h3>
+              <p>FaceHex may store limited account information, including user name, email address and account identifiers, using secure cloud-based infrastructure and related service providers necessary for account management and application functionality.</p>
+            </div>
           </section>
 
           <section data-aos="fade-up">
             <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">4. FACE DATA PROCESSING</h2>
             <div className="space-y-4">
-              <p>FaceHex is designed to perform facial analysis and AI face-swapping operations primarily on the user's device whenever technically possible.</p>
+              <p>FaceHex performs face-swapping and facial transformation processing primarily on the user's device. Face images used for supported face-swapping features are not uploaded to FaceHex servers for AI model training.</p>
               <p>FaceHex does not intentionally upload facial landmarks, biometric templates, face embeddings, face recognition identifiers, or generated face-swapping results to FaceHex-operated servers for AI training purposes.</p>
               <p>Images selected by users remain under the user's control unless otherwise required for specific cloud-based features.</p>
             </div>
@@ -320,11 +325,18 @@ const PrivacyPolicy = () => {
           </section>
 
           <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">11A. ACCOUNT DELETION</h2>
+            <div className="space-y-4">
+              <p>Users may request deletion of their FaceHex account and associated account information by contacting:</p>
+              <p className="font-semibold text-white"><EmailLink email="support@facehex.qzz.io" /></p>
+              <p>Upon verification of the request, FaceHex will delete or anonymise applicable account information within a reasonable period, unless retention is required by law, security requirements, fraud prevention obligations, or legitimate business purposes.</p>
+            </div>
+          </section>
+
+          <section data-aos="fade-up">
             <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">12. CHILDREN'S PRIVACY</h2>
             <div className="space-y-4">
-              <p>FaceHex is not intended for children under the age of 13.</p>
-              <p>We do not knowingly collect personal information from children under applicable legal age requirements.</p>
-              <p>If we become aware of such collection, appropriate action will be taken.</p>
+              <p>FaceHex may be used by users of all ages. Where required by applicable law, parental or guardian supervision and consent may be required for minors. FaceHex is committed to complying with applicable child safety and privacy requirements.</p>
             </div>
           </section>
 

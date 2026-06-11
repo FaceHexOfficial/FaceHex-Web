@@ -11,6 +11,7 @@ import Disclaimer from './pages/Disclaimer';
 import NotFound from './pages/NotFound';
 import { ErrorBoundary } from './pages/ErrorPage';
 import Loader from './components/Loader';
+import DeleteAccount from './pages/DeleteAccount';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -46,6 +47,7 @@ function App() {
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/disclaimer" element={<Disclaimer />} />
+            <Route path="/delete-account" element={<DeleteAccount />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

@@ -268,23 +268,26 @@ const TermsOfService = () => {
           </section>
 
           <section data-aos="fade-up">
-            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">13. ACCOUNT TERMINATION</h2>
-            <p className="mb-6">We reserve the right to:</p>
-            <ul className="flex flex-wrap gap-6 mb-8 text-gray-300">
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-white/50 rounded-full"></div> Suspend Accounts</li>
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-white/50 rounded-full"></div> Restrict Access</li>
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-white/50 rounded-full"></div> Terminate Accounts</li>
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-white/50 rounded-full"></div> Remove Content</li>
-            </ul>
-            <p className="mb-6">for any reason including:</p>
-            <ul className="flex flex-wrap gap-6 mb-6 text-gray-300">
-              <li className="px-4 py-2 bg-white/5 rounded-lg border border-white/10">Policy Violations</li>
-              <li className="px-4 py-2 bg-white/5 rounded-lg border border-white/10">Security Concerns</li>
-              <li className="px-4 py-2 bg-white/5 rounded-lg border border-white/10">Fraud</li>
-              <li className="px-4 py-2 bg-white/5 rounded-lg border border-white/10">Abuse</li>
-              <li className="px-4 py-2 bg-white/5 rounded-lg border border-white/10">Legal Requirements</li>
-            </ul>
-            <p className="italic text-gray-400">without prior notice where permitted by law.</p>
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">13. ACCOUNT DELETION & TERMINATION</h2>
+            <div className="space-y-6">
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-3">13.1 User-Initiated Deletion</h3>
+                <p className="text-gray-300">Users may request the deletion of their FaceHex account and associated data by contacting support at <EmailLink email="support@facehex.qzz.io" />. Data will be deleted in accordance with our Privacy Policy.</p>
+              </div>
+              
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-3">13.2 FaceHex-Initiated Termination</h3>
+                <p className="mb-4 text-gray-300">We reserve the right to suspend accounts, restrict access, terminate accounts, or remove content for any reason including:</p>
+                <ul className="flex flex-wrap gap-4 text-gray-300">
+                  <li className="px-4 py-2 bg-white/5 rounded-lg border border-white/10">Policy Violations</li>
+                  <li className="px-4 py-2 bg-white/5 rounded-lg border border-white/10">Security Concerns</li>
+                  <li className="px-4 py-2 bg-white/5 rounded-lg border border-white/10">Fraud</li>
+                  <li className="px-4 py-2 bg-white/5 rounded-lg border border-white/10">Abuse</li>
+                  <li className="px-4 py-2 bg-white/5 rounded-lg border border-white/10">Legal Requirements</li>
+                </ul>
+                <p className="mt-4 italic text-gray-400">without prior notice where permitted by law.</p>
+              </div>
+            </div>
           </section>
 
           <section data-aos="fade-up">

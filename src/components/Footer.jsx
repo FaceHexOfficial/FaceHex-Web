@@ -29,7 +29,7 @@ const Footer = () => {
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-sm text-gray-500">
           <p>© {new Date().getFullYear()} FaceHex. All rights reserved.</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
+          <div className="flex gap-6 mt-4 md:mt-0 flex-wrap justify-center">
             <NavLink to="/privacy" className="hover:text-white transition-colors">Privacy Policy</NavLink>
             <NavLink to="/terms" className="hover:text-white transition-colors">Terms & Conditions</NavLink>
             <NavLink to="/disclaimer" className="hover:text-white transition-colors">Disclaimer</NavLink>
