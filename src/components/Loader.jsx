@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useProgress, useFBX } from '@react-three/drei';
 
@@ -6,8 +6,10 @@ const Loader = ({ onComplete }) => {
   const containerRef = useRef(null);
   const hexRef = useRef(null);
   const textRef = useRef(null);
+  const progressBarRef = useRef(null);
+  const progressTextRef = useRef(null);
+  
   const { progress, total } = useProgress();
-  const [localProgress, setLocalProgress] = useState(0);
   const visualProgress = useRef({ val: 0 });
   const exitStarted = useRef(false);
 
@@ -26,56 +28,50 @@ const Loader = ({ onComplete }) => {
     );
   }, []);
 
+  const triggerExit = () => {
+    exitStarted.current = true;
+    
+    const exitTl = gsap.timeline({ delay: 0.3, onComplete });
+    
+    // Cinematic Fly-through effect: Massive Zoom IN with motion blur!
+    exitTl.to(containerRef.current, {
+      scale: 20, // Huge scale to fly completely *through* the center
+      opacity: 0,
+      filter: 'blur(15px)', // Stylish motion blur as it rushes past the camera
+      duration: 1.0,
+      ease: 'power4.in' // Accelerates smoothly like a hyper-drive
+    }, 0);
+  };
+
   useEffect(() => {
     // Smoothly animate the local progress number towards the actual load progress
-    // This prevents the "laggy" chunky jumps from 0 to 33 to 100
     gsap.to(visualProgress.current, {
       val: progress,
-      duration: 1.2, // Gives it a buttery smooth catch-up time
+      duration: 1.2, 
       ease: 'power2.out',
       onUpdate: () => {
-        setLocalProgress(Math.floor(visualProgress.current.val));
+        const val = Math.floor(visualProgress.current.val);
+        
+        // Use direct DOM manipulation instead of React state for 60fps lag-free performance!
+        if (progressBarRef.current) {
+          progressBarRef.current.style.width = `${val}%`;
+        }
+        if (progressTextRef.current) {
+          progressTextRef.current.innerText = `INITIALIZING ENGINE ${val}%`;
+        }
+
+        // Only exit when we have VISUALLY reached 100%
+        if (val >= 100 && total > 0 && !exitStarted.current) {
+          triggerExit();
+        }
       }
     });
-  }, [progress]);
-
-  useEffect(() => {
-    // Only exit when we have VISUALLY reached 100%
-    if (localProgress >= 100 && total > 0 && !exitStarted.current) {
-      exitStarted.current = true;
-      
-      const exitTl = gsap.timeline({ delay: 0.3, onComplete });
-      
-      // 1. Zoom the text towards the camera and fade out
-      exitTl.to(textRef.current.parentNode, {
-        opacity: 0,
-        scale: 2,
-        duration: 0.6,
-        ease: 'power2.in'
-      }, 0);
-
-      // 2. Dramatically zoom the 3D gyro towards the camera
-      exitTl.to(hexRef.current, {
-        scale: 15,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.in'
-      }, 0.1);
-
-      // 3. Zoom the full-screen background container to give that immersive "fly-through" effect
-      exitTl.to(containerRef.current, {
-        scale: 3,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.inOut'
-      }, 0.3);
-    }
-  }, [localProgress, total, onComplete]);
+  }, [progress, total]);
 
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background overflow-hidden"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background overflow-hidden origin-center"
     >
       {/* 3D Hexagon Graphic */}
       <div className="relative w-32 h-32 mb-12" style={{ perspective: '800px' }}>
@@ -119,13 +115,14 @@ const Loader = ({ onComplete }) => {
         {/* Progress Bar */}
         <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden relative">
           <div 
-            className="absolute top-0 left-0 h-full bg-white transition-all duration-100 ease-linear"
-            style={{ width: `${localProgress}%` }}
+            ref={progressBarRef}
+            className="absolute top-0 left-0 h-full bg-white transition-none"
+            style={{ width: `0%` }}
           ></div>
         </div>
         
-        <p className="text-gray-500 font-sans text-xs mt-4 uppercase tracking-widest">
-          Initializing Engine {localProgress}%
+        <p ref={progressTextRef} className="text-gray-500 font-sans text-xs mt-4 uppercase tracking-widest">
+          INITIALIZING ENGINE 0%
         </p>
       </div>
     </div>
@@ -134,7 +131,5 @@ const Loader = ({ onComplete }) => {
 
 // Preload heavy models so useProgress tracks them globally from the start
 useFBX.preload('/models/Waving.fbx');
-useFBX.preload('/models/Climbing_Up_Wall.fbx');
-useFBX.preload('/models/Climbing_Down_Wall.fbx');
 
 export default Loader;

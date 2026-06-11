@@ -82,19 +82,19 @@ const StitchHero = () => {
     <section ref={containerRef} className="relative w-full h-[100dvh] md:h-screen overflow-hidden bg-background">
       {/* Zero-Lag Image Sequence Canvas */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none mix-blend-lighten">
-        <canvas ref={canvasRef} className="w-full h-full object-cover pointer-events-none opacity-60"></canvas>
+        <canvas ref={canvasRef} className="w-full h-full object-cover object-[65%_center] md:object-center pointer-events-none opacity-60"></canvas>
       </div>
 
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10 pointer-events-none"></div>
 
       {/* Restored Text Content Overlay */}
-      <div className="absolute inset-0 flex flex-col items-start justify-center pl-8 md:pl-24 z-20 pointer-events-none w-full max-w-7xl mx-auto">
-        <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-black text-black tracking-[tightest] uppercase leading-none mb-6 mix-blend-overlay opacity-90" style={{ letterSpacing: '-0.05em' }}>
+      <div className="absolute inset-0 flex flex-col items-center justify-center md:items-start pl-4 md:pl-24 z-20 pointer-events-none w-full max-w-7xl mx-auto">
+        <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-black text-white md:text-black tracking-[tightest] uppercase leading-none mb-6 mix-blend-overlay opacity-90 text-center md:text-left" style={{ letterSpacing: '-0.05em' }}>
           FaceHex
         </h1>
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-[2px] bg-black opacity-50"></div>
-          <p className="text-sm md:text-xl font-sans text-black font-bold tracking-[0.3em] uppercase opacity-80 mix-blend-overlay">
+        <div className="flex flex-col md:flex-row items-center gap-4">
+          <div className="w-12 h-[2px] bg-white md:bg-black opacity-50 mb-2 md:mb-0"></div>
+          <p className="text-sm md:text-xl font-sans text-white md:text-black font-bold tracking-[0.3em] uppercase opacity-80 mix-blend-overlay text-center md:text-left">
             Real-Time AI Face Swap Engine
           </p>
         </div>

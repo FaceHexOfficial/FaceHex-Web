@@ -8,7 +8,6 @@ import Features from '../components/Features';
 import Preview from '../components/Preview';
 import Details from '../components/Details';
 import Footer from '../components/Footer';
-import ScrollingRobot from '../components/ScrollingRobot';
 
 const Home = () => {
   return (
@@ -18,7 +17,6 @@ const Home = () => {
       <About />
       <RevealHero />
       
-      <ScrollingRobot />
       <HowItWorks />
       <Features />
       <Preview />

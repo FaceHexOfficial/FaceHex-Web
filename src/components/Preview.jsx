@@ -13,7 +13,10 @@ const Preview = () => {
         <div className="bg-black rounded-2xl overflow-hidden relative aspect-[4/5] sm:aspect-square md:aspect-video flex flex-col md:flex-row">
           <div className="flex-1 bg-surface flex items-center justify-center p-4 md:p-8 relative overflow-hidden">
             <span className="absolute top-4 left-4 z-10 text-[10px] md:text-xs font-bold text-white/80 tracking-widest bg-black/50 px-2 py-1 rounded backdrop-blur-md">BEFORE</span>
-            <img src="/image2.png" alt="Before" className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500" 
+            <img src="/image1.png" alt="Before" 
+                 className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 pointer-events-none select-none" 
+                 onContextMenu={(e) => e.preventDefault()}
+                 onDragStart={(e) => e.preventDefault()}
                  onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
             <div className="hidden text-white/20 font-display font-bold text-4xl relative z-10">ORIGINAL</div>
           </div>
@@ -24,7 +27,10 @@ const Preview = () => {
           </div>
           <div className="flex-1 bg-surface flex items-center justify-center p-4 md:p-8 relative overflow-hidden">
             <span className="absolute top-4 right-4 z-10 text-[10px] md:text-xs font-bold text-white tracking-widest bg-black/50 px-2 py-1 rounded backdrop-blur-md">AFTER</span>
-            <img src="/image1.png" alt="After" className="absolute inset-0 w-full h-full object-cover" 
+            <img src="/image2.png" alt="After" 
+                 className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" 
+                 onContextMenu={(e) => e.preventDefault()}
+                 onDragStart={(e) => e.preventDefault()}
                  onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
             <div className="hidden text-white font-display font-bold text-4xl relative z-10">FACEHEX</div>
           </div>

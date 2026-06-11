@@ -7,7 +7,7 @@ const About = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         
         {/* Left: 3D Waving Robot */}
-        <div data-aos="fade-right" data-aos-duration="1500" className="relative h-[400px] w-full hidden md:flex items-center justify-center group">
+        <div className="relative h-[400px] w-full hidden md:flex items-center justify-center group">
           <AboutRobot />
         </div>
 

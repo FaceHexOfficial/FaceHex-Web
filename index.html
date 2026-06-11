@@ -4,10 +4,52 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <!-- Basic Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data: https:; connect-src 'self' ws: wss: https:;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    
     <title>FaceHex | AI Face Swap Engine</title>
   </head>
-  <body>
+  <body class="noselect">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Code Security & Anti-Debugging Script -->
+    <script>
+      // Disable Context Menu (Right Click)
+      document.addEventListener('contextmenu', event => event.preventDefault());
+
+      // Disable Dragging globally
+      document.addEventListener('dragstart', event => event.preventDefault());
+
+      // Disable Keyboard Shortcuts for Developer Tools and Source Code
+      document.addEventListener('keydown', function(event) {
+        // Prevent F12
+        if (event.key === 'F12' || event.keyCode === 123) {
+          event.preventDefault();
+        }
+        
+        // Prevent Ctrl+Shift+I / Cmd+Option+I (DevTools)
+        if ((event.ctrlKey || event.metaKey) && event.shiftKey && (event.key === 'I' || event.key === 'i')) {
+          event.preventDefault();
+        }
+        
+        // Prevent Ctrl+Shift+J / Cmd+Option+J (Console)
+        if ((event.ctrlKey || event.metaKey) && event.shiftKey && (event.key === 'J' || event.key === 'j')) {
+          event.preventDefault();
+        }
+        
+        // Prevent Ctrl+U / Cmd+U (View Source)
+        if ((event.ctrlKey || event.metaKey) && (event.key === 'U' || event.key === 'u')) {
+          event.preventDefault();
+        }
+        
+        // Prevent Ctrl+S / Cmd+S (Save Page)
+        if ((event.ctrlKey || event.metaKey) && (event.key === 'S' || event.key === 's')) {
+          event.preventDefault();
+        }
+      });
+    </script>
   </body>
 </html>

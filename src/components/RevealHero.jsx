@@ -19,6 +19,7 @@ const fragmentShader = `
   uniform sampler2D uTexture2;
   uniform vec2 uMouse;
   uniform float uHoverState;
+  uniform float uRevealAll;
   uniform float uPlaneAspect;
   
   uniform vec2 uTrailPos[80];
@@ -88,6 +89,14 @@ const fragmentShader = `
     // Apply global hover state (when mouse completely leaves, the whole screen shrinks away)
     finalMask *= uHoverState;
     
+    // Apply full-screen reveal state AFTER hover state (triggered by double-tap on mobile)
+    vec2 center = vec2(0.5, 0.5);
+    vec2 uvCenter = vUv - center;
+    uvCenter.x *= uPlaneAspect;
+    float distToCenter = length(uvCenter);
+    float centerMask = 1.0 - smoothstep(max(0.0, uRevealAll - 0.05), max(0.001, uRevealAll), distToCenter);
+    finalMask = max(finalMask, centerMask);
+    
     vec4 tex1 = texture2D(uTexture1, vUv);
     vec4 tex2 = texture2D(uTexture2, vUv);
     
@@ -107,6 +116,7 @@ const LiquidImageWarp = ({ image1, image2 }) => {
   // Track mouse UVs
   const mouse = useRef(new THREE.Vector2(0.5, 0.5));
   const hoverState = useRef({ value: 0 });
+  const revealAllState = useRef({ value: 0 });
 
   // Trail state
   const TRAIL_LENGTH = 80;
@@ -164,6 +174,23 @@ const LiquidImageWarp = ({ image1, image2 }) => {
     gsap.to(hoverState.current, { value: 0, duration: 4.0, delay: 0.5, ease: 'power2.inOut' });
   };
 
+  const handleDoubleClick = () => {
+    // Only apply double-tap erase effect on mobile devices
+    if (window.innerWidth < 768) {
+      gsap.killTweensOf(revealAllState.current);
+      
+      // Animate from 0 to 1.5 (covers corners), wait 2 seconds, then animate back to 0
+      gsap.to(revealAllState.current, {
+        value: 1.5,
+        duration: 2.0,
+        ease: 'power2.inOut',
+        yoyo: true,
+        repeat: 1,
+        repeatDelay: 2.0
+      });
+    }
+  };
+
   const uniforms = useMemo(() => {
      const trailPos = [];
      const trailAge = [];
@@ -176,6 +203,7 @@ const LiquidImageWarp = ({ image1, image2 }) => {
         uTexture2: { value: tex2 },
         uMouse: { value: mouse.current },
         uHoverState: { value: 0 },
+        uRevealAll: { value: 0 },
         uPlaneAspect: { value: scaleX / scaleY },
         uTrailPos: { value: trailPos },
         uTrailAge: { value: trailAge }
@@ -194,6 +222,7 @@ const LiquidImageWarp = ({ image1, image2 }) => {
     
     if (materialRef.current && materialRef.current.uniforms) {
       materialRef.current.uniforms.uHoverState.value = hoverState.current.value;
+      materialRef.current.uniforms.uRevealAll.value = revealAllState.current.value;
       materialRef.current.uniforms.uMouse.value = mouse.current;
       materialRef.current.uniforms.uPlaneAspect.value = scaleX / scaleY;
       
@@ -216,6 +245,7 @@ const LiquidImageWarp = ({ image1, image2 }) => {
       onPointerMove={handlePointerMove}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
+      onDoubleClick={handleDoubleClick}
     >
       <planeGeometry args={[1, 1, 64, 64]} />
       <shaderMaterial
@@ -229,6 +259,66 @@ const LiquidImageWarp = ({ image1, image2 }) => {
   );
 };
 
+// --- MOBILE SLIDER COMPONENT ---
+const MobileSlider = ({ image1, image2 }) => {
+  const [sliderPos, setSliderPos] = useState(50);
+  const containerRef = useRef(null);
+
+  const handleMove = (e) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    let clientX = e.clientX;
+    if (e.touches && e.touches.length > 0) {
+      clientX = e.touches[0].clientX;
+    } else if (e.type === 'touchmove') {
+      return; 
+    }
+    
+    let x = clientX - rect.left;
+    let pos = (x / rect.width) * 100;
+    pos = Math.max(0, Math.min(100, pos));
+    setSliderPos(pos);
+  };
+
+  return (
+    <div 
+      ref={containerRef}
+      className="relative w-full h-full overflow-hidden select-none touch-pan-y"
+      onMouseMove={(e) => { if (e.buttons === 1) handleMove(e); }}
+      onTouchMove={handleMove}
+      onMouseDown={handleMove}
+      onTouchStart={handleMove}
+    >
+      <img src={image2} className="absolute inset-0 w-full h-full object-cover pointer-events-none" alt="After" />
+      
+      <img 
+        src={image1} 
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none" 
+        style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
+        alt="Before"
+      />
+
+      <div 
+        className="absolute top-0 bottom-0 w-[2px] bg-white cursor-ew-resize z-10 shadow-[0_0_10px_rgba(0,0,0,0.5)]"
+        style={{ left: `calc(${sliderPos}%)` }}
+      >
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white shadow-lg pointer-events-none">
+           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '-2px'}}>
+             <path d="M15 18l-6-6 6-6"/>
+           </svg>
+           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{marginLeft: '-2px'}}>
+             <path d="M9 18l6-6-6-6"/>
+           </svg>
+        </div>
+      </div>
+      
+      <div className="absolute top-8 left-6 bg-black/60 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-xs font-bold z-10 shadow-md tracking-wider">BEFORE</div>
+      <div className="absolute top-8 right-6 bg-black/60 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-xs font-bold z-10 shadow-md tracking-wider">AFTER</div>
+    </div>
+  );
+};
+
+
 // --- MAIN COMPONENT ---
 
 const RevealHero = () => {
@@ -236,11 +326,19 @@ const RevealHero = () => {
   const image1 = '/image1.png';
   const image2 = '/image2.png';
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <section 
       id="webgl-hero-container" 
-      className="relative z-20 w-full h-[100dvh] md:h-screen overflow-hidden bg-black flex items-center justify-center cursor-default"
+      className="relative z-20 w-full h-[100vh] min-h-[100dvh] max-h-screen overflow-hidden bg-black flex items-center justify-center cursor-default"
       onPointerMove={() => { if (!hasInteracted) setHasInteracted(true); }}
       onTouchMove={() => { if (!hasInteracted) setHasInteracted(true); }}
     >
@@ -248,17 +346,21 @@ const RevealHero = () => {
       {/* Background glow for depth */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-white/5 rounded-full blur-[150px] pointer-events-none z-0"></div>
 
-      {/* WebGL Canvas */}
+      {/* Canvas / Mobile Slider */}
       <div className="absolute inset-0 z-10 w-full h-full">
-        <Canvas 
-          camera={{ position: [0, 0, 5], fov: 45 }} 
-          gl={{ antialias: true, alpha: true }}
-          dpr={[1, 2]}
-        >
-          <React.Suspense fallback={null}>
-            <LiquidImageWarp image1={image1} image2={image2} />
-          </React.Suspense>
-        </Canvas>
+        {isMobile ? (
+          <MobileSlider image1={image1} image2={image2} />
+        ) : (
+          <Canvas 
+            camera={{ position: [0, 0, 5], fov: 45 }} 
+            gl={{ antialias: true, alpha: true }}
+            dpr={[1, 2]}
+          >
+            <React.Suspense fallback={null}>
+              <LiquidImageWarp image1={image1} image2={image2} />
+            </React.Suspense>
+          </Canvas>
+        )}
       </div>
 
       {/* Top and Bottom Gradient Overlays to blend with website */}
@@ -267,13 +369,13 @@ const RevealHero = () => {
 
       {/* Interaction Hint Overlay */}
       <div 
-        className={`absolute top-32 left-1/2 -translate-x-1/2 md:left-24 md:-translate-x-0 z-30 pointer-events-none flex flex-col items-center md:items-start mix-blend-normal text-white md:text-black transition-opacity duration-1000 ${hasInteracted ? 'opacity-0' : 'opacity-100'}`}
+        className={`absolute top-32 left-1/2 -translate-x-1/2 md:left-24 md:-translate-x-0 z-30 pointer-events-none flex flex-col items-center md:items-start mix-blend-normal text-white transition-opacity duration-1000 ${hasInteracted ? 'opacity-0' : 'opacity-100'}`}
       >
-        <div className="w-8 h-8 rounded-full border border-white/40 md:border-black/40 flex items-center justify-center mb-3 animate-bounce shadow-[0_0_10px_rgba(255,255,255,0.2)] md:shadow-none">
-           <div className="w-1.5 h-1.5 bg-white md:bg-black rounded-full opacity-90 shadow-[0_0_5px_rgba(255,255,255,0.8)] md:shadow-none"></div>
+        <div className="w-8 h-8 rounded-full border border-white/40 flex items-center justify-center mb-3 animate-bounce shadow-[0_0_10px_rgba(255,255,255,0.2)]">
+           <div className="w-1.5 h-1.5 bg-white rounded-full opacity-90 shadow-[0_0_5px_rgba(255,255,255,0.8)]"></div>
         </div>
-        <p className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase opacity-90 text-center md:text-left drop-shadow-md md:drop-shadow-none">
-           <span className="md:hidden">Tap to reveal</span>
+        <p className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase opacity-90 text-center md:text-left drop-shadow-md">
+           <span className="md:hidden">Drag to reveal</span>
            <span className="hidden md:inline">Scratch to reveal</span>
         </p>
       </div>

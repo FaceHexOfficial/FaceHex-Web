@@ -10,6 +10,7 @@ const PrivacyPolicy = () => {
     AOS.init({
       duration: 1000,
       once: false, // Set to false so it animates when scrolling UP and DOWN
+      mirror: true,
       easing: 'ease-out-cubic',
       offset: 50,
     });
@@ -57,18 +58,18 @@ const PrivacyPolicy = () => {
           <section data-aos="fade-up">
             <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">2. ABOUT FACEHEX</h2>
             <div className="space-y-4 mb-6">
-              <p>FaceHex is an AI-powered facial transformation and face-swapping application designed to allow users to perform image-based and real-time face modifications using artificial intelligence and machine learning technologies.</p>
+              <p>FaceHex is an AI-powered facial transformation and identity synchronization application that enables users to perform image-based and real-time facial modifications using advanced artificial intelligence and machine learning technologies.</p>
               <p>FaceHex may provide features including:</p>
             </div>
             <ul className="list-disc pl-6 space-y-3 marker:text-white/30 text-gray-300">
-              <li>AI face swapping</li>
-              <li>Facial enhancement</li>
-              <li>Real-time face transformation</li>
-              <li>Camera-based processing</li>
-              <li>Photo-based processing</li>
-              <li>AI-generated image outputs</li>
-              <li>User account authentication</li>
-              <li>Cloud-based support services</li>
+              <li>AI Face Swapping</li>
+              <li>Facial Enhancement</li>
+              <li>Real-Time Face Transformation</li>
+              <li>Camera-Based Processing</li>
+              <li>Photo-Based Processing</li>
+              <li>AI-Generated Image Outputs</li>
+              <li>User Account Authentication</li>
+              <li>Cloud-Based Support Services</li>
             </ul>
           </section>
 
@@ -85,7 +86,7 @@ const PrivacyPolicy = () => {
                 <li>Account Profile Information</li>
                 <li>Support Communications</li>
                 <li>Feedback Submissions</li>
-                <li>User Generated Reports</li>
+                <li>User-Generated Reports</li>
               </ul>
             </div>
 
@@ -131,7 +132,8 @@ const PrivacyPolicy = () => {
           <section data-aos="fade-up">
             <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">5. GOOGLE SIGN-IN</h2>
             <div className="space-y-4 mb-6">
-              <p>FaceHex uses Google Sign-In authentication services. When using Google Sign-In, FaceHex may receive:</p>
+              <p>FaceHex uses Google Sign-In authentication services.</p>
+              <p>When using Google Sign-In, FaceHex may receive:</p>
             </div>
             <ul className="list-disc pl-6 space-y-3 marker:text-white/30 text-gray-300 mb-8">
               <li>User Name</li>
@@ -153,35 +155,115 @@ const PrivacyPolicy = () => {
             <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">6. HOW WE USE INFORMATION</h2>
             <p className="mb-6">We may use collected information to:</p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300">
-              <li>Authenticate users</li>
-              <li>Operate FaceHex services</li>
-              <li>Maintain account security</li>
-              <li>Prevent fraud and abuse</li>
-              <li>Respond to support requests</li>
-              <li>Improve application performance</li>
-              <li>Diagnose technical issues</li>
-              <li>Comply with legal obligations</li>
-              <li>Protect our rights and users</li>
+              <li>Authenticate Users</li>
+              <li>Operate FaceHex Services</li>
+              <li>Maintain Account Security</li>
+              <li>Prevent Fraud and Abuse</li>
+              <li>Respond to Support Requests</li>
+              <li>Improve Application Performance</li>
+              <li>Diagnose Technical Issues</li>
+              <li>Comply With Legal Obligations</li>
+              <li>Protect Our Rights And Users</li>
             </ul>
           </section>
 
           <section data-aos="fade-up">
             <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">7. AI AND MACHINE LEARNING</h2>
-            <div className="space-y-4 mb-6">
-              <p>FaceHex uses artificial intelligence and machine learning technologies.</p>
-              <p>Generated outputs may contain:</p>
+            <div className="space-y-6">
+              <div>
+                <p className="mb-4">FaceHex utilizes advanced artificial intelligence, machine learning models, and neural network technologies to perform facial transformations and identity synchronization.</p>
+              </div>
+              
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-3">7.1 AI-Generated Content</h3>
+                <p className="mb-3 text-gray-300">FaceHex uses advanced neural networks to synthesize identities and generate AI-enhanced outputs. All generated results are created by artificial intelligence and may not accurately represent real-world appearances or identities.</p>
+                <p className="text-gray-300">Users must not use FaceHex-generated content for deceptive, fraudulent, misleading, impersonation, unlawful, or harmful purposes.</p>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-3">7.2 User Responsibility</h3>
+                <p className="mb-3 text-gray-300">Users are solely responsible for ensuring that any identity synchronization, face-swapping, facial transformation, or image processing activities are conducted with the explicit authorization and consent of all individuals involved.</p>
+                <p className="text-gray-300">FaceHex disclaims liability for misuse, unauthorized use, unlawful use, or abuse of its technologies by users or third parties.</p>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-3">7.3 System Limitations</h3>
+                <p className="mb-4 text-gray-300">AI processing results may vary depending on numerous factors including:</p>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 list-disc pl-6 marker:text-white/30 text-gray-300 mb-4">
+                  <li>Device Hardware</li>
+                  <li>Camera Quality</li>
+                  <li>Lighting Conditions</li>
+                  <li>Network Conditions</li>
+                  <li>Input Image Quality</li>
+                  <li>Environmental Variables</li>
+                </ul>
+                <p className="text-gray-300">FaceHex does not guarantee consistent results across all devices or operating environments.</p>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-3">7.4 AI Output Disclaimer</h3>
+                <p className="mb-4 text-gray-300">Generated outputs may contain:</p>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 list-disc pl-6 marker:text-yellow-500/50 text-gray-300 mb-6">
+                  <li>Inaccuracies</li>
+                  <li>Distortions</li>
+                  <li>Artifacts</li>
+                  <li>Mismatches</li>
+                  <li>Unrealistic Features</li>
+                  <li>Unexpected Results</li>
+                </ul>
+                <p className="text-white italic bg-black/50 p-4 rounded-xl border border-white/10">
+                  FaceHex makes no guarantee regarding the accuracy, realism, authenticity, reliability, or suitability of AI-generated content.
+                </p>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-3">7.5 Consent and Authorized Use</h3>
+                <p className="mb-3 text-gray-300">Users represent and warrant that they possess all necessary rights, permissions, and lawful authority to upload, process, modify, transform, or synchronize any images, videos, or facial content submitted through FaceHex.</p>
+                <p className="text-gray-300">Users agree not to upload, process, or distribute content that violates the privacy, intellectual property rights, publicity rights, or other legal rights of any third party.</p>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-3">7.6 Biometric Information Disclaimer</h3>
+                <p className="mb-3 text-gray-300">FaceHex does not create or maintain biometric databases for identity recognition purposes.</p>
+                <p className="text-gray-300">Any facial analysis performed by FaceHex is intended solely for image transformation, enhancement, and processing features and is not used for surveillance, law enforcement, profiling, or identity verification purposes.</p>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-3">7.7 Prohibited Uses</h3>
+                <p className="mb-4 text-gray-300">Users may not use FaceHex to:</p>
+                <ul className="space-y-2 list-disc pl-6 marker:text-red-500/50 text-gray-300 mb-4">
+                  <li>Impersonate another individual without authorization</li>
+                  <li>Commit fraud, deception, harassment, or identity theft</li>
+                  <li>Create unlawful, abusive, defamatory, misleading, or harmful content</li>
+                  <li>Violate applicable laws, regulations, or third-party rights</li>
+                  <li>Circumvent security mechanisms or platform restrictions</li>
+                </ul>
+                <p className="text-white font-semibold">FaceHex reserves the right to suspend or terminate access for violations of these requirements.</p>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-3">7.8 No Professional Reliance</h3>
+                <p className="mb-3 text-gray-300">AI-generated content is provided for entertainment, creative, educational, and personal use purposes only.</p>
+                <p className="text-gray-300">Users should not rely on FaceHex-generated content as evidence of identity, authenticity, factual accuracy, professional advice, or official documentation.</p>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-3">7.9 Limitation of Liability Regarding AI Outputs</h3>
+                <p className="text-gray-300">To the fullest extent permitted by applicable law, FaceHex shall not be responsible for any direct, indirect, incidental, consequential, special, punitive, or exemplary damages arising from the creation, sharing, publication, reliance upon, or misuse of AI-generated content.</p>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-3">7.10 User Content Ownership</h3>
+                <p className="mb-3 text-gray-300">Users retain ownership of the original content they upload to FaceHex.</p>
+                <p className="text-gray-300">Except as necessary to provide the requested services, FaceHex does not claim ownership of user-uploaded photos, videos, or generated outputs.</p>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-3">7.11 Security and Abuse Prevention</h3>
+                <p className="mb-3 text-gray-300">FaceHex may implement automated systems designed to detect abuse, malicious activity, unauthorized access attempts, fraudulent behavior, security threats, or violations of applicable policies.</p>
+                <p className="text-gray-300">Such systems may collect limited technical information necessary to maintain platform integrity and security.</p>
+              </div>
             </div>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-yellow-500/50 text-gray-300 mb-6">
-              <li>Inaccuracies</li>
-              <li>Distortions</li>
-              <li>Artifacts</li>
-              <li>Mismatches</li>
-              <li>Unrealistic Features</li>
-              <li>Unexpected Results</li>
-            </ul>
-            <p className="p-4 bg-white/5 rounded-xl border border-white/10 text-white italic">
-              FaceHex makes no guarantee regarding the accuracy, realism, authenticity, or suitability of AI-generated content.
-            </p>
           </section>
 
           <section data-aos="fade-up">
@@ -190,10 +272,10 @@ const PrivacyPolicy = () => {
             <p className="mb-6">Information may be shared only:</p>
             <ul className="space-y-4 text-gray-300">
               <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> With Service Providers</li>
-              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> To Comply with Legal Obligations</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> To Comply With Legal Obligations</li>
               <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> To Enforce Our Policies</li>
-              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> To Protect Users and Public Safety</li>
-              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> During Corporate Restructuring Events if Applicable</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> To Protect Users And Public Safety</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> During Corporate Restructuring Events, If Applicable</li>
             </ul>
           </section>
 
@@ -204,7 +286,7 @@ const PrivacyPolicy = () => {
               <li>Provide Services</li>
               <li>Maintain Security</li>
               <li>Resolve Disputes</li>
-              <li>Comply with Legal Obligations</li>
+              <li>Comply With Legal Obligations</li>
               <li>Enforce Agreements</li>
             </ul>
             <p>When information is no longer required, it will be deleted or anonymized where reasonably practical.</p>
@@ -231,7 +313,7 @@ const PrivacyPolicy = () => {
               <li>Correct Information</li>
               <li>Delete Information</li>
               <li>Restrict Processing</li>
-              <li>Object to Processing</li>
+              <li>Object To Processing</li>
               <li>Request Data Portability</li>
             </ul>
             <p>Requests may be submitted through our support channels.</p>
@@ -269,7 +351,7 @@ const PrivacyPolicy = () => {
 
           <section data-aos="fade-up">
             <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">15. NO AI TRAINING USING USER CONTENT</h2>
-            <p>FaceHex does not use user-uploaded photos, videos, generated content, facial images, or personal content for training proprietary AI models.</p>
+            <p>FaceHex does not use user-uploaded photos, videos, generated content, facial images, biometric information, or personal content to train proprietary AI models.</p>
           </section>
 
           <section data-aos="fade-up">
@@ -293,7 +375,7 @@ const PrivacyPolicy = () => {
             </div>
             <div className="mt-12 pt-8 border-t border-white/10">
               <p className="text-gray-400">
-                For privacy-related inquiries, data requests, legal notices, copyright concerns, or support, please contact:<br/>
+                For privacy-related inquiries, data requests, legal notices, copyright concerns, or support requests, please contact:<br/>
                 <span className="mt-2 inline-block"><EmailLink email="support@facehex.qzz.io" /></span>
               </p>
             </div>

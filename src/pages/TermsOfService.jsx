@@ -9,6 +9,7 @@ const TermsOfService = () => {
     AOS.init({
       duration: 1000,
       once: false, 
+      mirror: true,
       easing: 'ease-out-cubic',
       offset: 50,
     });
@@ -46,6 +47,7 @@ const TermsOfService = () => {
             <div className="space-y-4">
               <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User") and FaceHex ("FaceHex", "we", "our", or "us").</p>
               <p>By downloading, installing, accessing, registering for, or using FaceHex, you acknowledge that you have read, understood, and agree to be bound by these Terms.</p>
+              <p>By using FaceHex, you further agree that you will not use the application for any illegal, fraudulent, harmful, deceptive, or unauthorized activities, including the creation, distribution, or publication of non-consensual content.</p>
               <p>If you do not agree with these Terms, you must immediately discontinue use of FaceHex.</p>
             </div>
           </section>
@@ -54,20 +56,20 @@ const TermsOfService = () => {
             <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">2. DESCRIPTION OF SERVICES</h2>
             <p className="mb-6">FaceHex is an AI-powered face-swapping and facial transformation application that allows users to:</p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
-              <li>Sign in using Google Sign-In</li>
-              <li>Select photos from their device</li>
-              <li>Use device camera functionality</li>
-              <li>Perform AI-powered face swapping</li>
-              <li>Generate modified images</li>
-              <li>Use facial transformation features</li>
+              <li>Sign In Using Google Sign-In</li>
+              <li>Select Photos From Their Device</li>
+              <li>Use Device Camera Functionality</li>
+              <li>Perform AI-Powered Face Swapping</li>
+              <li>Generate Modified Images</li>
+              <li>Use Facial Transformation Features</li>
             </ul>
             <p className="mb-6 font-semibold text-white">FaceHex is intended for:</p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300">
-              <li>Creative use</li>
-              <li>Entertainment use</li>
-              <li>Educational use</li>
-              <li>Research use</li>
-              <li>Personal use</li>
+              <li>Creative Use</li>
+              <li>Entertainment Use</li>
+              <li>Educational Use</li>
+              <li>Research Use</li>
+              <li>Personal Use</li>
             </ul>
           </section>
 
@@ -75,9 +77,9 @@ const TermsOfService = () => {
             <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">3. ELIGIBILITY</h2>
             <p className="mb-6">You must:</p>
             <ul className="space-y-4 text-gray-300 mb-6">
-              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Be legally capable of entering a binding agreement.</li>
-              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Comply with all applicable laws.</li>
-              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Be at least the age required under local law.</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Be Legally Capable Of Entering A Binding Agreement</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Comply With All Applicable Laws</li>
+              <li className="flex items-center gap-3"><div className="w-2 h-2 bg-white rounded-full"></div> Be At Least The Age Required Under Local Law</li>
             </ul>
             <p className="p-4 bg-white/5 rounded-xl border border-white/10 text-white italic">Users under 18 years of age must obtain parental or guardian permission.</p>
           </section>
@@ -86,12 +88,12 @@ const TermsOfService = () => {
             <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">4. USER RESPONSIBILITIES</h2>
             <p className="mb-6">You are solely responsible for:</p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
-              <li>Your account</li>
-              <li>Your actions</li>
-              <li>Uploaded content</li>
-              <li>Generated content</li>
-              <li>Shared content</li>
-              <li>Compliance with applicable laws</li>
+              <li>Your Account</li>
+              <li>Your Actions</li>
+              <li>Uploaded Content</li>
+              <li>Generated Content</li>
+              <li>Shared Content</li>
+              <li>Compliance With Applicable Laws</li>
             </ul>
             <p className="font-semibold text-white">You assume full responsibility for all consequences arising from your use of FaceHex.</p>
           </section>
@@ -115,40 +117,58 @@ const TermsOfService = () => {
             <h2 data-aos="fade-up" className="text-3xl font-display font-bold text-white mb-6 tracking-wide">6. PROHIBITED ACTIVITIES</h2>
             <p data-aos="fade-up" className="mb-6">You shall not use FaceHex to:</p>
             <ul data-aos="fade-up" className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-10">
-              <li>Commit fraud</li>
-              <li>Commit identity theft</li>
-              <li>Impersonate another person</li>
-              <li>Harass others</li>
-              <li>Defame others</li>
-              <li>Create unlawful deepfakes</li>
-              <li>Violate privacy rights</li>
-              <li>Violate publicity rights</li>
-              <li>Violate copyright rights</li>
-              <li>Violate trademark rights</li>
-              <li>Circumvent laws</li>
-              <li>Distribute malicious content</li>
-              <li>Conduct scams</li>
-              <li>Spread misinformation</li>
-              <li>Commit cybercrime</li>
-              <li>Facilitate criminal activity</li>
-              <li>Engage in unlawful surveillance</li>
-              <li>Produce illegal content</li>
-              <li>Exploit minors</li>
-              <li>Create harmful deceptive media</li>
+              <li>Commit Fraud</li>
+              <li>Commit Identity Theft</li>
+              <li>Impersonate Another Person</li>
+              <li>Harass Others</li>
+              <li>Defame Others</li>
+              <li>Create Unlawful Deepfakes</li>
+              <li>Violate Privacy Rights</li>
+              <li>Violate Publicity Rights</li>
+              <li>Violate Copyright Rights</li>
+              <li>Violate Trademark Rights</li>
+              <li>Circumvent Laws</li>
+              <li>Distribute Malicious Content</li>
+              <li>Conduct Scams</li>
+              <li>Spread Misinformation</li>
+              <li>Commit Cybercrime</li>
+              <li>Facilitate Criminal Activity</li>
+              <li>Engage In Unlawful Surveillance</li>
+              <li>Produce Illegal Content</li>
+              <li>Exploit Minors</li>
+              <li>Create Harmful Deceptive Media</li>
+              <li>Create Non-Consensual Content</li>
             </ul>
             <div data-aos="fade-up" className="p-6 bg-white/5 border border-white/10 rounded-2xl">
               <p className="mb-4 font-semibold text-white">Any prohibited activity may result in:</p>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 list-disc pl-6 marker:text-white/30 text-gray-300">
-                <li>Immediate account termination</li>
-                <li>Service suspension</li>
-                <li>Legal action</li>
-                <li>Reporting to authorities</li>
+                <li>Immediate Account Termination</li>
+                <li>Service Suspension</li>
+                <li>Legal Action</li>
+                <li>Reporting To Authorities</li>
               </ul>
             </div>
           </section>
 
           <section data-aos="fade-up">
-            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">7. AI GENERATED CONTENT</h2>
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">7. RESPONSIBLE AI USAGE</h2>
+            <div className="space-y-6">
+              <p>FaceHex uses artificial intelligence and machine learning technologies.</p>
+              <p>You are solely responsible for all content you create, modify, publish, distribute, or share using FaceHex.</p>
+              <p>You agree not to use FaceHex to:</p>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-red-500/50 text-gray-300">
+                <li>Violate The Privacy Of Others</li>
+                <li>Infringe The Rights Of Others</li>
+                <li>Misrepresent Identity</li>
+                <li>Create Harmful Or Misleading Content</li>
+                <li>Circumvent Applicable Laws</li>
+              </ul>
+              <p className="font-semibold text-white">FaceHex disclaims responsibility for user-generated content and user conduct.</p>
+            </div>
+          </section>
+
+          <section data-aos="fade-up">
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">8. AI GENERATED CONTENT</h2>
             <p className="mb-6">FaceHex uses artificial intelligence and machine learning technologies.</p>
             <p className="mb-4">Generated content may contain:</p>
             <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 list-disc pl-6 marker:text-yellow-500/50 text-gray-300 mb-8">
@@ -170,7 +190,7 @@ const TermsOfService = () => {
           </section>
 
           <section data-aos="fade-up">
-            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">8. INTELLECTUAL PROPERTY</h2>
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">9. INTELLECTUAL PROPERTY</h2>
             <p className="mb-6">All rights relating to:</p>
             <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
               <li>FaceHex</li>
@@ -182,15 +202,19 @@ const TermsOfService = () => {
               <li>Logos</li>
               <li>Documentation</li>
               <li>AI Systems</li>
+              <li>Neural Architectures</li>
+              <li>Proprietary Models</li>
+              <li>Processing Technologies</li>
             </ul>
             <div className="space-y-4">
               <p>remain the exclusive property of FaceHex and its licensors.</p>
+              <p>FaceHex and its proprietary neural architectures are protected by copyright, intellectual property laws, and applicable international laws.</p>
               <p className="font-semibold text-white">No ownership rights are transferred to users.</p>
             </div>
           </section>
 
           <section data-aos="fade-up">
-            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">9. REVERSE ENGINEERING PROHIBITION</h2>
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">10. REVERSE ENGINEERING PROHIBITION</h2>
             <p className="mb-6">Users shall not:</p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-6">
               <li>Reverse Engineer</li>
@@ -202,8 +226,9 @@ const TermsOfService = () => {
               <li>Bypass Security Controls</li>
               <li>Tamper With Application Integrity</li>
               <li>Create Derivative Versions</li>
+              <li>Access Proprietary Models Without Authorization</li>
             </ul>
-            <p className="mb-8 italic text-gray-400">except where expressly permitted by applicable law.</p>
+            <p className="mb-8 italic text-gray-400">Any attempt at reverse engineering, decompilation, unauthorized modification, extraction of proprietary technologies, or circumvention of security measures is strictly prohibited except where expressly permitted by applicable law.</p>
             
             <p className="mb-4 font-semibold text-white">Unauthorized attempts may result in:</p>
             <ul className="list-disc pl-6 space-y-2 marker:text-white/30 text-gray-300">
@@ -214,7 +239,7 @@ const TermsOfService = () => {
           </section>
 
           <section data-aos="fade-up">
-            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">10. SECURITY PROTECTIONS</h2>
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">11. SECURITY PROTECTIONS</h2>
             <p className="mb-6">FaceHex may implement:</p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-6">
               <li>Anti-Tampering Systems</li>
@@ -227,7 +252,7 @@ const TermsOfService = () => {
           </section>
 
           <section data-aos="fade-up">
-            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">11. THIRD-PARTY SERVICES</h2>
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">12. THIRD-PARTY SERVICES</h2>
             <p className="mb-6">FaceHex may interact with:</p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
               <li>Google Sign-In</li>
@@ -243,7 +268,7 @@ const TermsOfService = () => {
           </section>
 
           <section data-aos="fade-up">
-            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">12. ACCOUNT TERMINATION</h2>
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">13. ACCOUNT TERMINATION</h2>
             <p className="mb-6">We reserve the right to:</p>
             <ul className="flex flex-wrap gap-6 mb-8 text-gray-300">
               <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-white/50 rounded-full"></div> Suspend Accounts</li>
@@ -263,7 +288,7 @@ const TermsOfService = () => {
           </section>
 
           <section data-aos="fade-up">
-            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">13. NO LIABILITY FOR USER CONDUCT</h2>
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">14. NO LIABILITY FOR USER CONDUCT</h2>
             <p className="mb-6">Users are solely responsible for:</p>
             <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
               <li>Uploaded Content</li>
@@ -276,7 +301,7 @@ const TermsOfService = () => {
           </section>
 
           <section data-aos="fade-up">
-            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">14. INDEMNIFICATION</h2>
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">15. INDEMNIFICATION</h2>
             <p className="mb-6">You agree to defend, indemnify, and hold harmless:</p>
             <ul className="flex flex-wrap gap-4 mb-8">
               <li className="px-4 py-2 bg-white/10 rounded-full text-white text-sm font-semibold">FaceHex</li>
@@ -288,16 +313,16 @@ const TermsOfService = () => {
             </ul>
             <p className="mb-6">from any claims, losses, damages, liabilities, penalties, fines, judgments, settlements, costs, and legal expenses arising from:</p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300">
-              <li>Your Use of FaceHex</li>
+              <li>Your Use Of FaceHex</li>
               <li>Your Content</li>
               <li>Your Conduct</li>
-              <li>Your Violation of Law</li>
-              <li>Your Violation of Third-Party Rights</li>
+              <li>Your Violation Of Law</li>
+              <li>Your Violation Of Third-Party Rights</li>
             </ul>
           </section>
 
           <section data-aos="fade-up">
-            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">15. DISCLAIMER OF WARRANTIES</h2>
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">16. DISCLAIMER OF WARRANTIES</h2>
             <div className="flex flex-col md:flex-row items-center gap-6 mb-8 text-center md:text-left">
               <p>FaceHex is provided:</p>
               <div className="flex gap-4">
@@ -318,7 +343,7 @@ const TermsOfService = () => {
           </section>
 
           <section data-aos="fade-up">
-            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">16. LIMITATION OF LIABILITY</h2>
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">17. LIMITATION OF LIABILITY</h2>
             <p className="mb-6 italic text-gray-400">To the fullest extent permitted by applicable law:</p>
             <p className="mb-6">FaceHex, its owner, employees, contractors, licensors, and affiliates shall not be liable for:</p>
             <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 list-disc pl-6 marker:text-white/30 text-gray-300 mb-8">
@@ -339,12 +364,12 @@ const TermsOfService = () => {
           </section>
 
           <section data-aos="fade-up">
-            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">17. GOVERNING LAW</h2>
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">18. GOVERNING LAW</h2>
             <p>These Terms shall be governed by the laws of India.</p>
           </section>
 
           <section data-aos="fade-up">
-            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">18. DISPUTE RESOLUTION</h2>
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">19. DISPUTE RESOLUTION</h2>
             <p className="mb-6">Before initiating legal proceedings, parties agree to attempt informal resolution for at least thirty (30) days.</p>
             <p className="mb-6">If unresolved, disputes shall be resolved through arbitration in:</p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8 text-white">
@@ -365,7 +390,7 @@ const TermsOfService = () => {
           </section>
 
           <section data-aos="fade-up">
-            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">19. MODIFICATIONS</h2>
+            <h2 className="text-3xl font-display font-bold text-white mb-6 tracking-wide">20. MODIFICATIONS</h2>
             <div className="space-y-4">
               <p>FaceHex may modify these Terms at any time.</p>
               <p>Updated versions become effective upon publication.</p>
@@ -374,7 +399,7 @@ const TermsOfService = () => {
           </section>
 
           <section data-aos="fade-up" className="bg-gradient-to-br from-white/10 to-transparent border border-white/20 rounded-3xl p-8 md:p-12 mt-20 shadow-2xl">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-8">20. CONTACT INFORMATION</h2>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-8">21. CONTACT INFORMATION</h2>
             <div className="space-y-4 text-lg">
               <p><strong className="text-white w-32 inline-block">Business:</strong> FaceHex</p>
               <p><strong className="text-white w-32 inline-block">Application:</strong> FaceHex</p>
@@ -382,6 +407,12 @@ const TermsOfService = () => {
               <p className="flex flex-col md:flex-row md:items-center gap-2 mt-4 pt-4 border-t border-white/10">
                 <strong className="text-white w-32">Support:</strong> 
                 <EmailLink email="support@facehex.qzz.io" />
+              </p>
+            </div>
+            <div className="mt-12 pt-8 border-t border-white/10">
+              <p className="text-gray-400">
+                For legal notices, copyright matters, abuse reports, privacy concerns, or support requests, please contact:<br/>
+                <span className="mt-2 inline-block"><EmailLink email="support@facehex.qzz.io" /></span>
               </p>
             </div>
           </section>

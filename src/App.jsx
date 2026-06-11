@@ -8,6 +8,8 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import Disclaimer from './pages/Disclaimer';
 
+import NotFound from './pages/NotFound';
+import { ErrorBoundary } from './pages/ErrorPage';
 import Loader from './components/Loader';
 
 // Scroll to top on route change
@@ -24,27 +26,31 @@ function App() {
 
   useEffect(() => {
     AOS.init({
-      once: true,
+      once: false, // Ensures animations happen on both scroll up and scroll down
+      mirror: true, // Animates out when scrolling past them, so they animate IN when scrolling UP!
       offset: 50,
-      duration: 800,
+      duration: 1000, // Slightly longer for a more premium feel
       easing: 'ease-out-cubic',
     });
   }, []);
 
   return (
-    <Router>
-      <ScrollToTop />
-      {loading && <Loader onComplete={() => setLoading(false)} />}
-      
-      <div className={`bg-background min-h-screen text-primary selection:bg-white/30 selection:text-white ${loading ? 'opacity-0 h-0 overflow-hidden' : 'animate-in fade-in duration-1000 opacity-100'}`}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/terms" element={<TermsOfService />} />
-          <Route path="/disclaimer" element={<Disclaimer />} />
-        </Routes>
-      </div>
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <ScrollToTop />
+        {loading && <Loader onComplete={() => setLoading(false)} />}
+        
+        <div className={`bg-background min-h-screen text-primary selection:bg-white/30 selection:text-white ${loading ? 'opacity-0 h-0 overflow-hidden' : 'animate-in fade-in duration-1000 opacity-100'}`}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/disclaimer" element={<Disclaimer />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </Router>
+    </ErrorBoundary>
   );
 }
 
