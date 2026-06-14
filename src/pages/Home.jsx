@@ -8,6 +8,7 @@ import Features from '../components/Features';
 import Preview from '../components/Preview';
 import Details from '../components/Details';
 import Footer from '../components/Footer';
+import DemoVideo from '../components/DemoVideo';
 
 const Home = () => {
   return (
@@ -15,8 +16,10 @@ const Home = () => {
       <Navbar />
       <StitchHero />
       <About />
-      <RevealHero />
-      
+      <div className="hidden md:block">
+        <RevealHero />
+      </div>
+      <DemoVideo />
       <HowItWorks />
       <Features />
       <Preview />

@@ -21,16 +21,12 @@ const fragmentShader = `
   uniform float uHoverState;
   uniform float uRevealAll;
   uniform float uPlaneAspect;
+  uniform float uTime;
   
   uniform vec2 uTrailPos[80];
   uniform float uTrailAge[80];
   
   varying vec2 vUv;
-
-  // High-performance pseudo-random noise for WebGL
-  float random(vec2 st) {
-      return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
-  }
 
   // Distance to a line segment
   float sdSegment( vec2 p, vec2 a, vec2 b ) {
@@ -47,17 +43,23 @@ const fragmentShader = `
     
     // 1. Current cursor spotlight
     float dCursor = distance(uvAspect, uMouse * aspectVec);
-    // Sharp, organic jagged edge (like torn paper or a burnt hole)
+    
+    // SOUND WAVE VECTOR CIRCLE ERASER EFFECT
+    // Instead of random dust/noise, we use overlapping smooth sine waves 
+    // driven by angle and time to create a rippling vector wave edge
     float angle = atan(uvAspect.y - (uMouse.y * uPlaneAspect), uvAspect.x - uMouse.x);
-    float cursorNoise = sin(angle * 30.0) * 0.01 + random(vUv * 25.0) * 0.02;
+    float wave1 = sin(angle * 6.0 + uTime * 4.0) * 0.008;
+    float wave2 = sin(angle * 12.0 - uTime * 3.0) * 0.005;
+    float wave3 = sin(angle * 18.0 + uTime * 5.0) * 0.003;
+    float soundWaveEdge = wave1 + wave2 + wave3;
     
-    float radius = 0.12; // Base brush size (Smaller as requested!)
+    float radius = 0.18; // Base brush size (Increased for larger eraser)
     
-    // Sharp edge transition
-    float cursorMask = smoothstep(radius + cursorNoise, radius + cursorNoise - 0.015, dCursor);
+    // Smooth, rippling sound wave edge transition
+    float cursorMask = smoothstep(radius + soundWaveEdge, radius + soundWaveEdge - 0.015, dCursor);
     finalMask = max(finalMask, cursorMask);
     
-    // 2. Trail segments (No blur! Hole shrinks dynamically)
+    // 2. Trail segments
     for(int i=0; i<79; i++) {
        float age1 = uTrailAge[i];
        float age2 = uTrailAge[i+1];
@@ -78,18 +80,19 @@ const fragmentShader = `
        float trailRadius = (radius * 0.9) * sizeMultiplier;
        if (trailRadius <= 0.001) continue; // Hole is fully closed
        
-       // Organic jagged edge along the trail
-       float trailNoise = (sin((uvAspect.x + uvAspect.y) * 40.0) * 0.01 + random(vUv * 25.0) * 0.02) * sizeMultiplier;
+       // Trail also ripples like a vector wave!
+       float trailWave1 = sin((uvAspect.x + uvAspect.y) * 20.0 + uTime * 5.0) * 0.006;
+       float trailWave2 = sin((uvAspect.x - uvAspect.y) * 30.0 - uTime * 3.0) * 0.004;
+       float trailWaveEdge = (trailWave1 + trailWave2) * sizeMultiplier;
        
-       // The mask is always 1.0 solid, just physically smaller!
-       float tMask = smoothstep(trailRadius + trailNoise, trailRadius + trailNoise - 0.015, d);
+       float tMask = smoothstep(trailRadius + trailWaveEdge, trailRadius + trailWaveEdge - 0.015, d);
        finalMask = max(finalMask, tMask);
     }
     
-    // Apply global hover state (when mouse completely leaves, the whole screen shrinks away)
+    // Apply global hover state
     finalMask *= uHoverState;
     
-    // Apply full-screen reveal state AFTER hover state (triggered by double-tap on mobile)
+    // Apply full-screen reveal state
     vec2 center = vec2(0.5, 0.5);
     vec2 uvCenter = vUv - center;
     uvCenter.x *= uPlaneAspect;
@@ -100,7 +103,6 @@ const fragmentShader = `
     vec4 tex1 = texture2D(uTexture1, vUv);
     vec4 tex2 = texture2D(uTexture2, vUv);
     
-    // finalMask: 0.0 = original image, 1.0 = revealed image
     gl_FragColor = mix(tex1, tex2, finalMask);
   }
 `;
@@ -137,25 +139,19 @@ const LiquidImageWarp = ({ image1, image2 }) => {
 
   const handlePointerMove = (e) => {
     if (e.uv) {
-      // Very snappy mouse response for immediate erasing
       gsap.to(mouse.current, { x: e.uv.x, y: e.uv.y, duration: 0.1, ease: 'power2.out' });
       
       const lastPoint = trail.current[0];
       const dist = Math.hypot(lastPoint.x - e.uv.x, lastPoint.y - e.uv.y);
       
-      // Only record a new node if mouse moved enough distance OR last node is fully dead
-      // This creates a perfectly spaced skeleton for the line segments
       if (dist > 0.015 || lastPoint.age >= 1.0) {
-         // Shift array forward manually for performance
          for(let i = TRAIL_LENGTH - 1; i > 0; i--) {
             trail.current[i].x = trail.current[i-1].x;
             trail.current[i].y = trail.current[i-1].y;
             trail.current[i].age = trail.current[i-1].age;
          }
-         // Insert new
          trail.current[0] = { x: e.uv.x, y: e.uv.y, age: 0.0 };
       } else {
-         // Otherwise just update the most recent node to keep it fully erased
          trail.current[0].x = e.uv.x;
          trail.current[0].y = e.uv.y;
          trail.current[0].age = 0.0;
@@ -170,24 +166,13 @@ const LiquidImageWarp = ({ image1, image2 }) => {
   
   const handlePointerLeave = () => { 
     gsap.killTweensOf(hoverState.current);
-    // Erase entire canvas slowly when mouse leaves
     gsap.to(hoverState.current, { value: 0, duration: 4.0, delay: 0.5, ease: 'power2.inOut' });
   };
 
   const handleDoubleClick = () => {
-    // Only apply double-tap erase effect on mobile devices
     if (window.innerWidth < 768) {
       gsap.killTweensOf(revealAllState.current);
-      
-      // Animate from 0 to 1.5 (covers corners), wait 2 seconds, then animate back to 0
-      gsap.to(revealAllState.current, {
-        value: 1.5,
-        duration: 2.0,
-        ease: 'power2.inOut',
-        yoyo: true,
-        repeat: 1,
-        repeatDelay: 2.0
-      });
+      gsap.to(revealAllState.current, { value: 1.5, duration: 2.0, ease: 'power2.inOut', yoyo: true, repeat: 1, repeatDelay: 2.0 });
     }
   };
 
@@ -206,15 +191,14 @@ const LiquidImageWarp = ({ image1, image2 }) => {
         uRevealAll: { value: 0 },
         uPlaneAspect: { value: scaleX / scaleY },
         uTrailPos: { value: trailPos },
-        uTrailAge: { value: trailAge }
+        uTrailAge: { value: trailAge },
+        uTime: { value: 0 }
      };
   }, [tex1, tex2, scaleX, scaleY]);
 
   useFrame((state, delta) => {
-    // Fade time: Very slow, takes almost 7 seconds to fully disappear
     const FADE_SPEED = 0.15; 
     
-    // Update ages
     for(let i=0; i<TRAIL_LENGTH; i++) {
        trail.current[i].age += delta * FADE_SPEED;
        if (trail.current[i].age > 1.0) trail.current[i].age = 1.0;
@@ -225,8 +209,8 @@ const LiquidImageWarp = ({ image1, image2 }) => {
       materialRef.current.uniforms.uRevealAll.value = revealAllState.current.value;
       materialRef.current.uniforms.uMouse.value = mouse.current;
       materialRef.current.uniforms.uPlaneAspect.value = scaleX / scaleY;
+      materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime();
       
-      // Update uniform arrays IN PLACE for maximum performance! (Prevents GC stuttering)
       const trailPosUniform = materialRef.current.uniforms.uTrailPos.value;
       const trailAgeUniform = materialRef.current.uniforms.uTrailAge.value;
       
@@ -299,21 +283,25 @@ const MobileSlider = ({ image1, image2 }) => {
       />
 
       <div 
-        className="absolute top-0 bottom-0 w-[2px] bg-white cursor-ew-resize z-10 shadow-[0_0_10px_rgba(0,0,0,0.5)]"
+        className="absolute top-0 bottom-0 w-[2px] bg-white cursor-ew-resize z-10 shadow-[0_0_20px_rgba(255,255,255,0.5)]"
         style={{ left: `calc(${sliderPos}%)` }}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white shadow-lg pointer-events-none">
-           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '-2px'}}>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center pointer-events-none group">
+           
+           {/* Core Handle Container */}
+           <div className="absolute inset-0 bg-black/40 backdrop-blur-md rounded-full border border-white/50 shadow-[0_0_15px_rgba(255,255,255,0.4)] z-0"></div>
+
+           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="relative z-10 -mr-0.5 drop-shadow-md">
              <path d="M15 18l-6-6 6-6"/>
            </svg>
-           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{marginLeft: '-2px'}}>
+           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="relative z-10 -ml-0.5 drop-shadow-md">
              <path d="M9 18l6-6-6-6"/>
            </svg>
         </div>
       </div>
       
-      <div className="absolute top-8 left-6 bg-black/60 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-xs font-bold z-10 shadow-md tracking-wider">BEFORE</div>
-      <div className="absolute top-8 right-6 bg-black/60 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-xs font-bold z-10 shadow-md tracking-wider">AFTER</div>
+      <div className="absolute top-8 left-6 bg-black/60 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-xs font-bold z-10 shadow-md tracking-wider">AFTER</div>
+      <div className="absolute top-8 right-6 bg-black/60 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-xs font-bold z-10 shadow-md tracking-wider">BEFORE</div>
     </div>
   );
 };
@@ -322,7 +310,6 @@ const MobileSlider = ({ image1, image2 }) => {
 // --- MAIN COMPONENT ---
 
 const RevealHero = () => {
-  // Use the public paths
   const image1 = '/image1.png';
   const image2 = '/image2.png';
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -335,18 +322,20 @@ const RevealHero = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  const handlePointerMove = (e) => {
+    if (!hasInteracted) setHasInteracted(true);
+  };
+
   return (
     <section 
       id="webgl-hero-container" 
       className="relative z-20 w-full h-[100vh] min-h-[100dvh] max-h-screen overflow-hidden bg-black flex items-center justify-center cursor-default"
-      onPointerMove={() => { if (!hasInteracted) setHasInteracted(true); }}
+      onPointerMove={handlePointerMove}
       onTouchMove={() => { if (!hasInteracted) setHasInteracted(true); }}
     >
       
-      {/* Background glow for depth */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-white/5 rounded-full blur-[150px] pointer-events-none z-0"></div>
 
-      {/* Canvas / Mobile Slider */}
       <div className="absolute inset-0 z-10 w-full h-full">
         {isMobile ? (
           <MobileSlider image1={image1} image2={image2} />
@@ -363,14 +352,10 @@ const RevealHero = () => {
         )}
       </div>
 
-      {/* Top and Bottom Gradient Overlays to blend with website */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-transparent z-20 pointer-events-none opacity-80 h-32"></div>
       <div className="absolute inset-0 top-auto bg-gradient-to-t from-background via-transparent to-transparent z-20 pointer-events-none opacity-80 h-32"></div>
 
-      {/* Interaction Hint Overlay */}
-      <div 
-        className={`absolute top-32 left-1/2 -translate-x-1/2 md:left-24 md:-translate-x-0 z-30 pointer-events-none flex flex-col items-center md:items-start mix-blend-normal text-white transition-opacity duration-1000 ${hasInteracted ? 'opacity-0' : 'opacity-100'}`}
-      >
+      <div className={`absolute top-32 left-1/2 -translate-x-1/2 md:left-24 md:-translate-x-0 z-30 pointer-events-none flex flex-col items-center md:items-start mix-blend-normal text-white transition-opacity duration-1000 ${hasInteracted ? 'opacity-0' : 'opacity-100'}`}>
         <div className="w-8 h-8 rounded-full border border-white/40 flex items-center justify-center mb-3 animate-bounce shadow-[0_0_10px_rgba(255,255,255,0.2)]">
            <div className="w-1.5 h-1.5 bg-white rounded-full opacity-90 shadow-[0_0_5px_rgba(255,255,255,0.8)]"></div>
         </div>
@@ -378,10 +363,6 @@ const RevealHero = () => {
            <span className="md:hidden">Drag to reveal</span>
            <span className="hidden md:inline">Scratch to reveal</span>
         </p>
-      </div>
-
-      {/* Optional: Minimalist cursor follower to emphasize the interaction point */}
-      <div className="absolute inset-0 z-20 pointer-events-none mix-blend-difference opacity-50" id="custom-cursor">
       </div>
 
     </section>
